@@ -1,0 +1,6 @@
+- what should be logged, and to where? (stdout/stderr, or a rotating log file, or a database, ...)
+- cache compiled Ajv validator schemas on the RouteHandler
+- add test routes for checking handling of invalid output, methods throwing errors, etc
+- use a mock-datetime library to artificially set the system clock ahead, to verify expiration of old data
+- generate a sum max. once per X seconds using `_.throttle`, to reduce the amount of work done
+- eslint rules & buil dstep

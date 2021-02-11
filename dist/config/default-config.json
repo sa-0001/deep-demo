@@ -1,0 +1,16 @@
+{
+    "info": {
+        "name": "Deep-Demo API",
+        "description": "A demo api service.",
+        "contact": "sievers.aaron@gmail.com",
+        "version": "1.0.0"
+    },
+    "services": {
+        "express": {
+            "host": "localhost",
+            "port": 8080,
+            "prefix": "/api",
+            "url": "http://localhost:8080/api"
+        }
+    }
+}

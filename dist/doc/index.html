@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Deep-Demo API</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+	<body>
+		<redoc></redoc>
+		<script src="https://cdn.jsdelivr.net/npm/redoc@2.0.0-rc.18/bundles/redoc.standalone.js"></script>
+		<script>
+			Redoc.init('index.json', {
+				expandResponses: '2XX',
+				hideSingleRequestSampleTab: true,
+				lazyRendering: true,
+				nativeScrollbars: true,
+			})
+		</script>
+	</body>
+</html>

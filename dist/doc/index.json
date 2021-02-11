@@ -1,0 +1,157 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"title": "Deep-Demo API",
+		"description": "A demo api service.",
+		"version": "1.0.0",
+		"contact": {
+			"email": "sievers.aaron@gmail.com"
+		}
+	},
+	"host": "localhost:8080",
+	"basePath": "/api",
+	"schemes": [
+		"http"
+	],
+	"consumes": [
+		"application/json; charset=utf-8"
+	],
+	"produces": [
+		"application/json; charset=utf-8"
+	],
+	"responses": {
+		"400": {
+			"description": "Invalid Request"
+		},
+		"401": {
+			"description": "Unauthorized"
+		},
+		"404": {
+			"description": "Not Found"
+		},
+		"500": {
+			"description": "Internal Server Error"
+		},
+		"default": {
+			"schema": {
+				"$ref": "#/definitions/RpcError"
+			}
+		}
+	},
+	"definitions": {
+		"RpcError": {
+			"description": "RPC Error Response",
+			"type": "object",
+			"nullable": false,
+			"required": [
+				"error"
+			],
+			"properties": {
+				"error": {
+					"type": "string",
+					"nullable": false
+				}
+			}
+		}
+	},
+	"paths": {
+		"/metrics/:key/sum": {
+			"get": {
+				"summary": "get sum of a metric",
+				"description": "get the sum of all values of a metrics key (including only values from the last hour)",
+				"tags": [
+					"Metrics"
+				],
+				"parameters": [
+					{
+						"in": "body",
+						"name": "body",
+						"required": true,
+						"schema": {
+							"type": "object",
+							"nullable": false,
+							"properties": {
+								"key": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				],
+				"responses": {
+					"2XX": {
+						"schema": {
+							"type": "object",
+							"nullable": false,
+							"properties": {
+								"key": {
+									"type": "string"
+								},
+								"value": {
+									"type": "integer",
+									"minimum": 0
+								}
+							}
+						}
+					},
+					"default": {
+						"schema": {
+							"$ref": "#/definitions/RpcError"
+						}
+					}
+				}
+			}
+		},
+		"/metrics/:key": {
+			"post": {
+				"summary": "increment a metric",
+				"description": "add a value to a metrics key",
+				"tags": [
+					"Metrics"
+				],
+				"parameters": [
+					{
+						"in": "body",
+						"name": "body",
+						"required": true,
+						"schema": {
+							"type": "object",
+							"nullable": false,
+							"properties": {
+								"key": {
+									"type": "string"
+								},
+								"value": {
+									"type": "integer",
+									"minimum": 1
+								}
+							}
+						}
+					}
+				],
+				"responses": {
+					"2XX": {
+						"schema": {
+							"type": "object",
+							"nullable": false,
+							"properties": {}
+						}
+					},
+					"default": {
+						"schema": {
+							"$ref": "#/definitions/RpcError"
+						}
+					}
+				}
+			}
+		}
+	},
+	"x-tagGroups": [
+		{
+			"name": "Metrics",
+			"tags": [
+				"Metrics"
+			]
+		}
+	]
+}
